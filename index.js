@@ -8,9 +8,13 @@ const app = express();
 const port = process.env.PORT || 3000;
 
 // Setup database
-const db = new Low(new JSONFile('db.json'));
+const { Low } = require('lowdb');
+const { JSONFile } = require('lowdb/node');
+
+let db;
 
 async function initDB() {
+  db = new Low(new JSONFile('db.json'));
   await db.read();
   db.data ||= { messages: [] };
   await db.write();
