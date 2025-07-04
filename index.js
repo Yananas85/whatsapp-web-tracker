@@ -98,6 +98,5 @@ setInterval(async () => {
 client.initialize();
 
 app.get("/", (req, res) => res.send("WhatsApp Tracker is running"));
-const path = require('path');
 app.use('/qr', express.static(path.join(__dirname, 'public')));
 app.listen(port, () => console.log(`Web server listening on port ${port}`));
