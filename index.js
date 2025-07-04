@@ -30,7 +30,7 @@ const fs = require('fs');
 const path = require('path');
 
 client.on('qr', async qr => {
-  console.log("Scan QR at: https://your-app-url.onrender.com/qr");
+  console.log("Scan QR at: https://whatsapp-web-tracker.onrender.com/qr");
 
   const qrImage = await QRCode.toDataURL(qr);
 
