@@ -1,4 +1,4 @@
-const qrcode = require('qrcode-terminal');
+const QRCode = require('qrcode');
 const { Client, LocalAuth } = require('whatsapp-web.js');
 const fetch = require('node-fetch');
 const { Low } = require('lowdb');
@@ -26,8 +26,14 @@ const client = new Client({
     }
 });
 
-client.on('qr', qr => {
-    qrcode.generate(qr, { small: true });
+client.on('qr', async qr => {
+  console.log("Scan QR at: https://your-app-url.onrender.com/qr");
+
+  const qrImage = await QRCode.toDataURL(qr);
+
+  require('fs').writeFileSync('./public/qr.html', `
+    <html><body><img src="${qrImage}" /></body></html>
+  `);
 });
 
 client.on('ready', () => {
@@ -86,4 +92,6 @@ setInterval(async () => {
 client.initialize();
 
 app.get("/", (req, res) => res.send("WhatsApp Tracker is running"));
+const path = require('path');
+app.use('/qr', express.static(path.join(__dirname, 'public')));
 app.listen(port, () => console.log(`Web server listening on port ${port}`));
