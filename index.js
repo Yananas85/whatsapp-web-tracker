@@ -26,14 +26,20 @@ const client = new Client({
     }
 });
 
+const fs = require('fs');
+const path = require('path');
+
 client.on('qr', async qr => {
   console.log("Scan QR at: https://your-app-url.onrender.com/qr");
 
   const qrImage = await QRCode.toDataURL(qr);
 
-  require('fs').writeFileSync('./public/qr.html', `
-    <html><body><img src="${qrImage}" /></body></html>
-  `);
+  const qrDir = path.join(__dirname, 'public');
+  if (!fs.existsSync(qrDir)) {
+    fs.mkdirSync(qrDir);
+  }
+
+  fs.writeFileSync(path.join(qrDir, 'qr.html'), `<html><body><img src="${qrImage}" /></body></html>`);
 });
 
 client.on('ready', () => {
