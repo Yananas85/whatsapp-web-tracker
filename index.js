@@ -9,7 +9,9 @@ const port = process.env.PORT || 3000;
 
 // Setup database
 const db = new Low(new JSONFile('db.json'));
-db.data = db.data || { messages: [] };
+await db.read();
+db.data ||= { messages: [] };
+await db.write();
 
 // Init WhatsApp client
 const client = new Client({
