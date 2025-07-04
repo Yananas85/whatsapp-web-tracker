@@ -1,7 +1,8 @@
 const qrcode = require('qrcode-terminal');
 const { Client, LocalAuth } = require('whatsapp-web.js');
 const fetch = require('node-fetch');
-const { Low, JSONFile } = require('lowdb');
+const { Low } = require('lowdb');
+const { JSONFile } = require('lowdb/node'); // <- Correct location
 const express = require('express');
 const app = express();
 const port = process.env.PORT || 3000;
