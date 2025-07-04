@@ -1,6 +1,7 @@
 {
   "name": "whatsapp-web-tracker",
   "version": "1.0.0",
+  "type": "commonjs",
   "description": "Track WhatsApp messages with no reply after 48h and send to Make.com",
   "main": "index.js",
   "scripts": {
