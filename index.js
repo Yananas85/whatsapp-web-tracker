@@ -11,7 +11,7 @@ const port = process.env.PORT || 3000;
 let db;
 
 async function initDB() {
-  db = new Low(new JSONFile('db.json'));
+  db = new Low(new JSONFile('db.json'), { messages: [] });
   await db.read();
   db.data ||= { messages: [] };
   await db.write();
